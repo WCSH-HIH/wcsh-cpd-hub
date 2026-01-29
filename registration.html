@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPD Registration Form - WCSH CPD Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 50%, #1e40af 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            top: 10%;
+            left: 10%;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 30px;
+        }
+
+        .form-embed {
+            width: 100%;
+            height: 800px;
+            border: none;
+        }
+
+        .qr-section {
+            text-align: center;
+        }
+
+        .qr-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 20px 50px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .qr-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .qr-info {
+            color: rgba(255, 255, 255, 0.9);
+            margin-top: 15px;
+            font-size: 1rem;
+        }
+
+        /* Modal for QR Code */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 30px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: modalSlideIn 0.3s ease-out;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 20px;
+        }
+
+        .qr-code-display {
+            background: #f3f4f6;
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .qr-placeholder {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            background: white;
+            border: 3px solid #3b82f6;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .qr-instruction {
+            color: #6b7280;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .close-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .close-button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #93c5fd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #bfdbfe;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.3rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .content-card {
+                padding: 25px;
+            }
+            .qr-placeholder {
+                width: 250px;
+                height: 250px;
+            }
+            .form-embed {
+                height: 600px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <a href="javascript:void(0)" class="back-button" onclick="goBackToMain()">
+                <span>←</span>
+                <span>BACK TO MAIN</span>
+            </a>
+            <div class="page-title">
+                <span>📋</span>
+                <span>CPD REGISTRATION FORM</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="content-card">
+            <h1 class="section-title">
+                <span>📝</span>
+                <span>Register for CPD Programs</span>
+            </h1>
+
+            <!-- Google Form Embed -->
+            <div class="form-container">
+                <!-- REPLACE THE src WITH YOUR ACTUAL GOOGLE FORM EMBED LINK -->
+                <iframe 
+                    class="form-embed"
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSdFAlFgRXjvPA0pP6X5h8zPdsPYhUBoNEkMtj13gUux5OQ_WA/viewform"
+                    frameborder="0"
+                    marginheight="0"
+                    marginwidth="0">
+                    Loading…
+                </iframe>
+            </div>
+
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <button class="qr-button" onclick="showQRCode()">
+                    <span>📱</span>
+                    <span>SHOW QR CODE FOR MOBILE REGISTRATION</span>
+                </button>
+                <p class="qr-info">Click to display QR code for participants to scan from distance</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- QR Code Modal -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <h2 class="modal-title">📱 Scan to Register</h2>
+            <p class="qr-instruction">Participants can scan this QR code to fill the registration form</p>
+            
+            <div class="qr-code-display">
+                <div class="qr-placeholder">
+                    <div id="qrcode"></div>
+                </div>
+            </div>
+            
+            <button class="close-button" onclick="closeQRCode()">CLOSE</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>DEVELOPED BY WCSH HIH, <a href="mailto:wcshhih@gmail.com">wcshhih@gmail.com</a></p>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script>
+        let qrCodeGenerated = false;
+
+        function showQRCode() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.add('active');
+
+            // Generate QR code only once
+            if (!qrCodeGenerated) {
+                // REPLACE THIS URL WITH YOUR ACTUAL GOOGLE FORM URL
+                const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSdFAlFgRXjvPA0pP6X5h8zPdsPYhUBoNEkMtj13gUux5OQ_WA/viewform";
+                
+                const qrcode = new QRCode(document.getElementById("qrcode"), {
+                    text: formURL,
+                    width: 280,
+                    height: 280,
+                    colorDark: "#1e3a8a",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.H
+                });
+                
+                qrCodeGenerated = true;
+            }
+        }
+
+        function closeQRCode() {
+            const modal = document.getElementById('qrModal');
+            modal.classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('qrModal');
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeQRCode();
+            }
+        });
+        
+        // Function to navigate back to main system page
+        function goBackToMain() {
+            window.location.href = 'index.html?page=mainSystem';
+        }
+    </script>
+</body>
+</html>

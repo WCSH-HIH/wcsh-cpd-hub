@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPD Head Portal - WCSH CPD Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #7c2d12 0%, #ea580c 50%, #dc2626 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: #f59e0b;
+            top: 10%;
+            left: 10%;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: #dc2626;
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Welcome Section */
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .welcome-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        .authorized-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            margin-top: 15px;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .dashboard-card:hover::before {
+            opacity: 1;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Special Card for CEU Verification */
+        .ceu-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+            border: 2px solid rgba(147, 197, 253, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #fcd34d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #fef3c7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 1.5rem;
+            }
+            .welcome-title {
+                font-size: 2rem;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-button">
+                <span>←</span>
+                <span>LOGOUT</span>
+            </a>
+            <div class="page-title">
+                <span>🔒</span>
+                <span>CPD HEAD PORTAL</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="welcome-title">👋 Welcome to the CPD Head Official Dashboard</h1>
+            <p class="welcome-text">
+                This secure portal is exclusively designed for the CPD Head to manage, monitor, and oversee 
+                all Continuing Professional Development activities. You have full access to all submitted data, 
+                reports, and verification systems.
+            </p>
+            <div class="authorized-badge">🔐 AUTHORIZED ACCESS ONLY</div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- 1. IHRIS Page -->
+            <div class="dashboard-card" onclick="window.open('https://hrd.moh.gov.et/login', '_blank')">
+                <span class="card-icon">🌐</span>
+                <h3 class="card-title">IHRIS PAGE</h3>
+                <p class="card-description">Access the Human Resources Information System portal</p>
+            </div>
+
+            <!-- 2. Trainers Bank -->
+            <div class="dashboard-card" onclick="openGoogleSheet('TRAINERS_BANK_SHEET_URL')">
+                <span class="card-icon">👨‍🏫</span>
+                <h3 class="card-title">TRAINERS BANK</h3>
+                <p class="card-description">View database of registered trainers and their credentials</p>
+            </div>
+
+            <!-- 3. Need Assessment Report -->
+            <div class="dashboard-card" onclick="openGoogleSheet('NEED_ASSESSMENT_SHEET_URL')">
+                <span class="card-icon">📊</span>
+                <h3 class="card-title">NEED ASSESSMENT REPORT</h3>
+                <p class="card-description">Review training needs assessment submissions</p>
+            </div>
+
+            <!-- 4. Category Two CEU Verification (Special) -->
+            <div class="dashboard-card ceu-card" onclick="window.location.href='ceu-verification.html'">
+                <span class="card-icon">✔️</span>
+                <h3 class="card-title">CATEGORY TWO CEU VERIFICATION</h3>
+                <p class="card-description">Verify and generate certificates for Category 2 CEU submissions</p>
+            </div>
+
+            <!-- 5. QI Project Report -->
+            <div class="dashboard-card" onclick="openGoogleSheet('QI_PROJECT_SHEET_URL')">
+                <span class="card-icon">🔬</span>
+                <h3 class="card-title">QI PROJECT REPORT</h3>
+                <p class="card-description">Access Quality Improvement project submissions</p>
+            </div>
+
+            <!-- 6. CPD Registration Data -->
+            <div class="dashboard-card" onclick="openGoogleSheet('CPD_REGISTRATION_SHEET_URL')">
+                <span class="card-icon">📋</span>
+                <h3 class="card-title">CPD REGISTRATION DATA</h3>
+                <p class="card-description">View all CPD program registration responses</p>
+            </div>
+
+            <!-- 7. Daily Feedback Data -->
+            <div class="dashboard-card" onclick="openGoogleSheet('DAILY_FEEDBACK_SHEET_URL')">
+                <span class="card-icon">💬</span>
+                <h3 class="card-title">DAILY FEEDBACK DATA</h3>
+                <p class="card-description">Review daily training feedback submissions</p>
+            </div>
+
+            <!-- 8. End Course Feedback Data -->
+            <div class="dashboard-card" onclick="openGoogleSheet('END_COURSE_FEEDBACK_SHEET_URL')">
+                <span class="card-icon">🎓</span>
+                <h3 class="card-title">END COURSE FEEDBACK DATA</h3>
+                <p class="card-description">Access end-of-course evaluation responses</p>
+            </div>
+
+            <!-- 9. E-Learning Login Track -->
+            <div class="dashboard-card" onclick="openGoogleSheet('E_LEARNING_LOGIN_SHEET_URL')">
+                <span class="card-icon">🖥️</span>
+                <h3 class="card-title">E-LEARNING LOGIN TRACK</h3>
+                <p class="card-description">Monitor e-learning platform login activities and tracking data</p>
+            </div>
+
+            <!-- 10. CPD Events Update -->
+            <div class="dashboard-card" onclick="openGoogleSheet('CPD_EVENTS_UPDATE_SHEET_URL')">
+                <span class="card-icon">📅</span>
+                <h3 class="card-title">CPD EVENTS UPDATE</h3>
+                <p class="card-description">View and manage upcoming CPD events and training schedules</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>DEVELOPED BY WCSH HIH, <a href="mailto:wcshhih@gmail.com">wcshhih@gmail.com</a></p>
+    </div>
+
+    <script>
+        function openGoogleSheet(sheetIdentifier) {
+            // This function will open Google Sheets in a new tab
+            // You need to replace the placeholders with actual Google Sheet URLs
+            
+            const sheetURLs = {
+                'TRAINERS_BANK_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1S0kpk37dGXp0Q0BMVBeHoF0lDSDYIuAGBgs2OZYtCS4/edit',
+                'NEED_ASSESSMENT_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1Sydhbj0bF5-ABks1jwsdKi5eVmisV1F1UFZmlwQTvuY/edit',
+                'QI_PROJECT_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1ndCNuRfsG2sWKJ2M3Rg8CIyXIWoBj1xkelYBLqizn-o/edit',
+                'CPD_REGISTRATION_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1i7NrR9Eq1uJU_NCdFBwJ30ZVgRAc7_dNXjnNMlx9a4U/edit',
+                'DAILY_FEEDBACK_SHEET_URL': 'https://docs.google.com/spreadsheets/d/17Kl1Nlb7oe7zM8bOC2CtCJSD7mmo5jlokECZtyUpDFw/edit',
+                'END_COURSE_FEEDBACK_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1MBMPYeaIsoxkHt1wZqvrRcaIVnavAFL5zHUOMGq-pX0/edit',
+                'E_LEARNING_LOGIN_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1xJ_GZEA6qltR6RcIHWXdNAC1UREULZ0QU7Uq2Vf_mdE/edit',
+                'CPD_EVENTS_UPDATE_SHEET_URL': 'https://docs.google.com/spreadsheets/d/1vll3aOgptOWQ3-4D2hlcPTgSlwYMLoFug2G-i-ajw14/edit'
+            };
+
+            const url = sheetURLs[sheetIdentifier];
+            
+            if (url && !url.includes('YOUR_')) {
+                window.open(url, '_blank');
+            } else {
+                alert('Please configure the Google Sheet URL for: ' + sheetIdentifier.replace('_', ' ') + '\n\nEdit the sheetURLs object in the script section and replace with your actual Google Sheet link.');
+            }
+        }
+    </script>
+</body>
+</html>

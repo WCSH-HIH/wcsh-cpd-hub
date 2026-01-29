@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Two CEU Verification - WCSH CPD Center</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #8b5cf6 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            top: 10%;
+            left: 10%;
+        }
+
+        .orb2 {
+            width: 500px;
+            height: 500px;
+            background: #8b5cf6;
+            bottom: 10%;
+            right: 10%;
+            animation-delay: 2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.1); }
+        }
+
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 0;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-button {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 12px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .page-title {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .main-content {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .welcome-section {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .welcome-title {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 900;
+            margin-bottom: 12px;
+        }
+
+        .welcome-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .action-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+        }
+
+        .card-title {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .card-description {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px 35px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .action-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Certificate Generator Section */
+        .generator-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 35px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-label {
+            color: white;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+        .phone-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .phone-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+        }
+
+        .search-button {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .search-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Certificate Display */
+        .certificate-container {
+            display: none;
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            margin-top: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .certificate-container.active {
+            display: block;
+        }
+
+        .certificate {
+            border: 8px solid #1e3a8a;
+            border-radius: 15px;
+            padding: 40px;
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            position: relative;
+        }
+
+        .cert-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .cert-logo-circle {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            border: 5px solid white;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .cert-title {
+            text-align: center;
+            color: #1e3a8a;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .cert-field {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .cert-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .cert-value {
+            color: #1e3a8a;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .cert-signature {
+            margin-top: 40px;
+            text-align: right;
+        }
+
+        .signature-line {
+            border-top: 2px solid #1e3a8a;
+            width: 250px;
+            margin-left: auto;
+            margin-bottom: 5px;
+        }
+
+        .signature-text {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .print-button {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 18px 50px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .print-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(20px);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 10;
+            margin-top: 50px;
+        }
+
+        .footer a {
+            color: #93c5fd;
+            text-decoration: none;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .certificate-container, .certificate-container * {
+                visibility: visible;
+            }
+            .certificate-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .print-button {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-title {
+                font-size: 1.3rem;
+            }
+            .certificate {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <div class="header">
+        <div class="header-content">
+            <a href="cpd-head-portal.html" class="back-button">
+                <span>←</span>
+                <span>BACK TO PORTAL</span>
+            </a>
+            <div class="page-title">
+                <span>✔️</span>
+                <span>CATEGORY TWO CEU VERIFICATION</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="welcome-section">
+            <h1 class="welcome-title">📋 Category Two CEU Verification</h1>
+            <p class="welcome-text">
+                Verify submitted CEU applications and generate official certificates with total credits
+            </p>
+        </div>
+
+        <div class="action-grid">
+            <!-- View Submissions -->
+            <div class="action-card">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <h3 class="card-title">View All Submissions</h3>
+                </div>
+                <p class="card-description">
+                    Access the Google Sheet containing all Category 2 CEU submissions with participant details and credits.
+                </p>
+                <button class="action-button" onclick="openCEUSheet()">
+                    <span>📄</span>
+                    <span>OPEN CEU SUBMISSIONS SHEET</span>
+                </button>
+            </div>
+
+            <!-- Generate Certificate -->
+            <div class="action-card">
+                <div class="card-header">
+                    <span class="card-icon">🎓</span>
+                    <h3 class="card-title">Generate Certificate</h3>
+                </div>
+                <p class="card-description">
+                    Enter participant's phone number to automatically generate and print their CEU verification certificate.
+                </p>
+                
+                <div class="input-group">
+                    <label class="input-label">Phone Number:</label>
+                    <input 
+                        type="tel" 
+                        id="phoneNumber" 
+                        class="phone-input" 
+                        placeholder="Enter phone number (e.g., 0912345678)"
+                    >
+                </div>
+                
+                <button class="search-button" onclick="generateCertificate()">
+                    <span>🔍</span>
+                    <span>GENERATE CERTIFICATE</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Certificate Display -->
+        <div id="certificateContainer" class="certificate-container">
+            <div class="certificate" id="certificate">
+                <div class="cert-logo">
+                    <div class="cert-logo-circle">
+                        <img src="assets/logo.png" alt="WCSH Logo" style="width: 100px; height: 100px; object-fit: contain; border-radius: 50%;">
+                    </div>
+                </div>
+                
+                <h2 class="cert-title">Category Two CEU Verification Certificate</h2>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Participant Name</div>
+                    <div class="cert-value" id="certName">-</div>
+                </div>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Profession</div>
+                    <div class="cert-value" id="certProfession">-</div>
+                </div>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Topic</div>
+                    <div class="cert-value" id="certTopic">-</div>
+                </div>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Activity Type</div>
+                    <div class="cert-value" id="certActivityType">-</div>
+                </div>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Total CEU Credits</div>
+                    <div class="cert-value" id="certCEU">-</div>
+                </div>
+                
+                <div class="cert-field">
+                    <div class="cert-label">Verification Status</div>
+                    <div class="cert-value" id="certStatus">VERIFIED ✓</div>
+                </div>
+                
+                <div class="cert-signature">
+                    <div class="signature-line"></div>
+                    <div class="signature-text">CPD Head Signature</div>
+                    <div class="signature-text" style="font-size: 0.9rem; color: #6b7280;">
+                        Worabe Comprehensive Specialized Hospital
+                    </div>
+                </div>
+            </div>
+            
+            <button class="print-button" onclick="window.print()">
+                <span>🖨️</span>
+                <span>PRINT CERTIFICATE</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>DEVELOPED BY WCSH HIH, <a href="mailto:wcshhih@gmail.com">wcshhih@gmail.com</a></p>
+    </div>
+
+    <script>
+        // REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxc1uQgTy_SOuyvL7TEfLIan9VuBOycJIZX3ggzrQRuZgcLlvbzmNuzTBHU5CEi25ON-w/exec';
+
+        function openCEUSheet() {
+            // REPLACE WITH YOUR ACTUAL CEU SUBMISSIONS GOOGLE SHEET URL
+            const sheetURL = 'https://docs.google.com/spreadsheets/d/1cyURH7exboLbGclhncC7-5OskTtziDpMD56y6RSWGMQ/edit';
+            
+            if (sheetURL.includes('YOUR_')) {
+                alert('Please configure the CEU Submissions Google Sheet URL in the script section.');
+            } else {
+                window.open(sheetURL, '_blank');
+            }
+        }
+
+        async function generateCertificate() {
+            const phoneNumber = document.getElementById('phoneNumber').value.trim();
+            
+            if (!phoneNumber) {
+                alert('Please enter a phone number');
+                return;
+            }
+
+            // Show loading state
+            const searchButton = document.querySelector('.search-button');
+            const originalText = searchButton.innerHTML;
+            searchButton.innerHTML = '⏳ Searching...';
+            searchButton.disabled = true;
+
+            try {
+                // Fetch data from Google Apps Script
+                const response = await fetch(APPS_SCRIPT_URL + '?phone=' + encodeURIComponent(phoneNumber));
+                const result = await response.json();
+
+                if (result.success) {
+                    const data = result.data;
+                    
+                    // Populate certificate with new fields
+                    document.getElementById('certName').textContent = data.name;
+                    document.getElementById('certProfession').textContent = data.profession || 'N/A';
+                    document.getElementById('certTopic').textContent = data.topic;
+                    document.getElementById('certActivityType').textContent = data.activityType || 'N/A';
+                    document.getElementById('certCEU').textContent = data.totalCEU + ' CEU Credits';
+                    
+                    // Update status based on data from sheet
+                    const statusElement = document.getElementById('certStatus');
+                    if (data.status && data.status.toLowerCase().includes('verified')) {
+                        statusElement.textContent = 'VERIFIED ✓';
+                        statusElement.style.color = '#059669';
+                    } else if (data.status && data.status.toLowerCase().includes('approved')) {
+                        statusElement.textContent = 'APPROVED ✓';
+                        statusElement.style.color = '#059669';
+                    } else {
+                        statusElement.textContent = data.status || 'PENDING VERIFICATION';
+                        statusElement.style.color = '#ea580c';
+                    }
+                    
+                    // Show certificate
+                    document.getElementById('certificateContainer').classList.add('active');
+                    
+                    // Scroll to certificate
+                    setTimeout(() => {
+                        document.getElementById('certificateContainer').scrollIntoView({ 
+                            behavior: 'smooth' 
+                        });
+                    }, 100);
+                } else {
+                    alert(result.message || 'No record found for this phone number.\n\nPlease verify the phone number or check the CEU submissions sheet.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error fetching data. Please check:\n1. Apps Script URL is configured correctly\n2. Apps Script is deployed as Web App\n3. Internet connection is working');
+            } finally {
+                // Restore button
+                searchButton.innerHTML = originalText;
+                searchButton.disabled = false;
+            }
+        }
+
+        // Allow Enter key for phone search
+        document.getElementById('phoneNumber').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateCertificate();
+            }
+        });
+    </script>
+</body>
+</html>
